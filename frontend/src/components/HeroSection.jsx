@@ -21,27 +21,27 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div>
             
             {/* Floating orbs */}
-            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-fuchsia-600 to-pink-600 rounded-full opacity-20 blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full opacity-10 blur-3xl animate-pulse delay-500"></div>
+            <div className="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-64 h-64 md:w-96 md:h-96 bg-gradient-to-r from-fuchsia-600 to-pink-600 rounded-full opacity-20 blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[500px] md:h-[500px] bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full opacity-10 blur-3xl animate-pulse delay-500"></div>
             
             {/* Shooting stars */}
             <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full shadow-[0_0_6px_#fff] animate-ping"></div>
             <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400 rounded-full shadow-[0_0_6px_#c084fc] animate-ping delay-700"></div>
             <div className="absolute top-1/2 left-3/4 w-1 h-1 bg-blue-400 rounded-full shadow-[0_0_6px_#60a5fa] animate-ping delay-1000"></div>
 
-            <div className='flex flex-col gap-10 my-16 relative z-10 px-4'>
+            <div className='flex flex-col gap-6 md:gap-10 my-10 md:my-16 relative z-10 px-4'>
                 {/* Badge with neon effect */}
                 <div className="relative mx-auto">
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-500 rounded-full blur opacity-75 animate-pulse"></div>
-                    <span className='relative mx-auto px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-violet-500 text-white font-bold text-sm tracking-wide shadow-2xl border border-white/20 hover:scale-105 transition-all duration-500 cursor-default'>
+                    <span className='relative mx-auto px-5 py-3 md:px-8 md:py-4 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-violet-500 text-white font-bold text-xs md:text-sm tracking-wide shadow-2xl border border-white/20 hover:scale-105 transition-all duration-500 cursor-default'>
                         ✨ No. 1 Job Hunt Website ✨
                     </span>
                 </div>
 
-                {/* Main heading with advanced effects */}
-                <div className="relative">
-                    <h1 className='text-7xl lg:text-8xl font-black leading-tight'>
+                {/* Main heading */}
+                <div className="relative px-2">
+                    <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight'>
                         <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
                             Search, Apply &
                         </span>
@@ -59,14 +59,14 @@ const HeroSection = () => {
                 </div>
 
                 {/* Enhanced description */}
-                <p className='text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light'>
+                <p className='text-base md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light px-4'>
                     Unlock your potential with cutting-edge job matching technology. 
-                    <br />
-                    <span className="text-purple-300">Your dream career is just one search away.</span>
+                    <br className="hidden sm:block" />
+                    <span className="text-purple-300"> Your dream career is just one search away.</span>
                 </p>
 
                 {/* Futuristic search bar */}
-                <div className='relative w-[50%] mx-auto group'>
+                <div className='relative w-[92%] sm:w-[80%] md:w-[65%] lg:w-[50%] mx-auto group'>
                     {/* Glow effect */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 rounded-full blur opacity-30 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
                     
@@ -75,24 +75,24 @@ const HeroSection = () => {
                             type="text"
                             placeholder='🚀 Find your dream jobs...'
                             onChange={(e) => setQuery(e.target.value)}
-                            className='outline-none border-none w-full py-6 px-8 bg-transparent text-white placeholder-gray-300 text-lg font-medium'
+                            onKeyDown={(e) => e.key === 'Enter' && searchJobHandler()}
+                            className='outline-none border-none w-full py-4 md:py-6 px-5 md:px-8 bg-transparent text-white placeholder-gray-300 text-sm md:text-lg font-medium'
                         />
                         <Button 
                             onClick={searchJobHandler} 
-                            className="rounded-r-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 px-8 py-6 shadow-2xl border-0 transform hover:scale-110 transition-all duration-300 relative overflow-hidden group"
+                            className="rounded-r-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 px-5 md:px-8 py-4 md:py-6 shadow-2xl border-0 transform hover:scale-110 transition-all duration-300 relative overflow-hidden group"
                         >
-                            {/* Button shimmer effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                            <Search className='h-7 w-7 relative z-10' />
+                            <Search className='h-5 w-5 md:h-7 md:w-7 relative z-10' />
                         </Button>
                     </div>
                 </div>
 
-                {/* Floating elements */}
-                <div className="absolute top-32 right-20 opacity-20">
+                {/* Floating decorative elements - hidden on mobile */}
+                <div className="hidden md:block absolute top-32 right-20 opacity-20">
                     <div className="w-16 h-16 border border-purple-400 rounded-lg rotate-45 animate-spin-slow"></div>
                 </div>
-                <div className="absolute bottom-32 left-20 opacity-20">
+                <div className="hidden md:block absolute bottom-32 left-20 opacity-20">
                     <div className="w-12 h-12 border border-blue-400 rounded-full animate-bounce delay-300"></div>
                 </div>
             </div>

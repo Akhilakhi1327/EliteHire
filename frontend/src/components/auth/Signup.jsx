@@ -157,9 +157,9 @@ const Signup = () => {
                             </div>
 
                             {/* Role + Profile Photo */}
-                            <div className='flex items-center justify-between gap-6'>
+                            <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6'>
                                 <div className='flex-1'>
-                                    <Label className="text-purple-300 font-semibold mb-4 block">I am a</Label>
+                                    <Label className="text-purple-300 font-semibold mb-3 block">I am a</Label>
                                     <RadioGroup className="flex items-center gap-6">
                                         <div className="flex items-center space-x-3 group cursor-pointer">
                                             <Input
