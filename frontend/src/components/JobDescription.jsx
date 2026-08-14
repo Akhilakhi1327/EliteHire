@@ -16,7 +16,7 @@ const JobDescription = () => {
 
     const params = useParams();
     const jobId = params.id;
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const applyJobHandler = async () => {
         try {
@@ -51,32 +51,67 @@ const JobDescription = () => {
     },[jobId,dispatch, user?._id]);
 
     return (
-        <div className='max-w-7xl mx-auto my-10'>
-            <div className='flex items-center justify-between'>
+        <div className='max-w-7xl mx-auto my-6 md:my-10 px-4'>
+            {/* Back Button */}
+            <div className='mb-6'>
+                <Button variant="outline" onClick={() => navigate(-1)} className="flex items-center gap-2 border-purple-400/50 hover:border-purple-400 text-gray-700 hover:text-purple-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    Back to Jobs
+                </Button>
+            </div>
+
+            <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
                 <div>
-                    <h1 className='font-bold text-xl'>{singleJob?.title}</h1>
-                    <div className='flex items-center gap-2 mt-4'>
-                        <Badge className={'text-blue-700 font-bold'} variant="ghost">{singleJob?.postion} Positions</Badge>
-                        <Badge className={'text-[#F83002] font-bold'} variant="ghost">{singleJob?.jobType}</Badge>
-                        <Badge className={'text-[#7209b7] font-bold'} variant="ghost">{singleJob?.salary}LPA</Badge>
+                    <h1 className='font-bold text-2xl md:text-3xl text-gray-900'>{singleJob?.title}</h1>
+                    <div className='flex flex-wrap items-center gap-2 mt-4'>
+                        <Badge className={'text-blue-700 font-bold bg-blue-100/50'} variant="ghost">{singleJob?.postion} Positions</Badge>
+                        <Badge className={'text-[#F83002] font-bold bg-red-100/50'} variant="ghost">{singleJob?.jobType}</Badge>
+                        <Badge className={'text-[#7209b7] font-bold bg-purple-100/50'} variant="ghost">{singleJob?.salary}LPA</Badge>
                     </div>
                 </div>
                 <Button
                 onClick={isApplied ? null : applyJobHandler}
                     disabled={isApplied}
-                    className={`rounded-lg ${isApplied ? 'bg-gray-600 cursor-not-allowed' : 'bg-[#7209b7] hover:bg-[#5f32ad]'}`}>
+                    className={`rounded-lg w-full sm:w-auto px-8 py-6 text-md shadow-lg transition-all duration-300 ${isApplied ? 'bg-gray-600 cursor-not-allowed shadow-none' : 'bg-gradient-to-r from-[#7209b7] to-[#43147d] hover:from-[#5f32ad] hover:to-[#361066] text-white hover:shadow-purple-500/30 transform hover:-translate-y-1'}`}>
                     {isApplied ? 'Already Applied' : 'Apply Now'}
                 </Button>
             </div>
-            <h1 className='border-b-2 border-b-gray-300 font-medium py-4'>Job Description</h1>
-            <div className='my-4'>
-                <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleJob?.title}</span></h1>
-                <h1 className='font-bold my-1'>Location: <span className='pl-4 font-normal text-gray-800'>{singleJob?.location}</span></h1>
-                <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleJob?.description}</span></h1>
-                <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experience} yrs</span></h1>
-                <h1 className='font-bold my-1'>Salary: <span className='pl-4 font-normal text-gray-800'>{singleJob?.salary}LPA</span></h1>
-                <h1 className='font-bold my-1'>Total Applicants: <span className='pl-4 font-normal text-gray-800'>{singleJob?.applications?.length}</span></h1>
-                <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJob?.createdAt.split("T")[0]}</span></h1>
+            
+            <div className='mt-8 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden'>
+                <div className='bg-gray-50 border-b border-gray-200 px-6 py-4'>
+                    <h1 className='font-bold text-lg text-gray-800'>Job Description</h1>
+                </div>
+                
+                <div className='p-6 space-y-4 text-sm md:text-base'>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Role:</h1>
+                        <span className='font-normal text-gray-700 break-words'>{singleJob?.title}</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Location:</h1>
+                        <span className='font-normal text-gray-700 break-words'>{singleJob?.location}</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Description:</h1>
+                        <span className='font-normal text-gray-700 break-words leading-relaxed'>{singleJob?.description}</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Experience:</h1>
+                        <span className='font-normal text-gray-700'>{singleJob?.experience} yrs</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Salary:</h1>
+                        <span className='font-normal text-gray-700'>{singleJob?.salary}LPA</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Total Applicants:</h1>
+                        <span className='font-normal text-gray-700'>{singleJob?.applications?.length}</span>
+                    </div>
+                    <div className='flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4'>
+                        <h1 className='font-bold min-w-[140px] text-gray-900'>Posted Date:</h1>
+                        <span className='font-normal text-gray-700'>{singleJob?.createdAt.split("T")[0]}</span>
+                    </div>
+                </div>
             </div>
         </div>
     )

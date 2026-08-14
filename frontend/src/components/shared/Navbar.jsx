@@ -129,9 +129,9 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Right Side */}
-                <div className="flex md:hidden items-center gap-3">
+                <div className="flex md:hidden items-center gap-2">
                     {user && user.role === 'recruiter' && <Notifications />}
-                    {user && (
+                    {user ? (
                         <Popover>
                             <PopoverTrigger asChild>
                                 <div className="relative group cursor-pointer">
@@ -164,11 +164,20 @@ const Navbar = () => {
                                 </div>
                             </PopoverContent>
                         </Popover>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <Link to="/login">
+                                <Button variant="outline" size="sm" className="h-8 px-3 text-xs border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400">Login</Button>
+                            </Link>
+                            <Link to="/signup">
+                                <Button size="sm" className="h-8 px-3 text-xs bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold">Signup</Button>
+                            </Link>
+                        </div>
                     )}
                     {/* Hamburger Button */}
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="text-gray-300 hover:text-white transition-colors duration-300 p-1"
+                        className="text-gray-300 hover:text-white transition-colors duration-300 p-1 ml-1"
                     >
                         {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
