@@ -45,7 +45,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className='relative bg-gradient-to-r from-slate-900 via-purple-900/80 to-slate-900 backdrop-blur-xl border-b border-purple-500/30'>
+        <div className='relative z-[100] bg-gradient-to-r from-slate-900 via-purple-900/80 to-slate-900 backdrop-blur-xl border-b border-purple-500/30'>
             {/* Animated background grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:20px_20px] opacity-20 pointer-events-none"></div>
 
@@ -58,7 +58,7 @@ const Navbar = () => {
 
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16 md:h-20 px-4 relative z-50'>
                 {/* Logo */}
-                <div className="relative z-50">
+                <div className="relative z-50 cursor-pointer" onClick={() => navigate('/')}>
                     <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 blur-lg opacity-20 rounded-lg pointer-events-none"></div>
                     <h1 className='relative text-2xl md:text-3xl font-black'>
                         <span className="bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent drop-shadow-lg">Elite</span>
@@ -74,15 +74,11 @@ const Navbar = () => {
 
                     {!user ? (
                         <div className='flex items-center gap-3 relative z-50'>
-                            <Link to="/login">
-                                <Button variant="outline" className="border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400 backdrop-blur-sm transition-all duration-300 font-semibold px-5 py-2">Login</Button>
-                            </Link>
-                            <Link to="/signup">
-                                <Button className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white font-semibold px-5 py-2 shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                                    <span className="relative z-10">Signup</span>
-                                </Button>
-                            </Link>
+                            <Button onClick={() => navigate('/login')} variant="outline" className="border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400 backdrop-blur-sm transition-all duration-300 font-semibold px-5 py-2">Login</Button>
+                            <Button onClick={() => navigate('/signup')} className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white font-semibold px-5 py-2 shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                                <span className="relative z-10">Signup</span>
+                            </Button>
                         </div>
                     ) : (
                         <div className='flex items-center gap-4'>
@@ -111,8 +107,8 @@ const Navbar = () => {
                                             {user && user.role === 'student' && (
                                                 <div className='flex w-fit items-center gap-3 cursor-pointer group hover:bg-white/10 rounded-lg p-2 transition-all duration-300'>
                                                     <User2 className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
-                                                    <Button variant="link" className="text-gray-300 hover:text-white p-0 h-auto font-medium">
-                                                        <Link to="/profile">View Profile</Link>
+                                                    <Button variant="link" className="text-gray-300 hover:text-white p-0 h-auto font-medium" onClick={() => navigate('/profile')}>
+                                                        View Profile
                                                     </Button>
                                                 </div>
                                             )}
@@ -129,9 +125,9 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Right Side */}
-                <div className="flex md:hidden items-center gap-2">
+                <div className="flex md:hidden items-center gap-3">
                     {user && user.role === 'recruiter' && <Notifications />}
-                    {user ? (
+                    {user && (
                         <Popover>
                             <PopoverTrigger asChild>
                                 <div className="relative group cursor-pointer">
@@ -152,9 +148,9 @@ const Navbar = () => {
                                 </div>
                                 <div className='flex flex-col text-gray-300'>
                                     {user.role === 'student' && (
-                                        <div className='flex items-center gap-2 cursor-pointer hover:bg-white/10 rounded-lg p-2 transition-all duration-300'>
+                                        <div className='flex items-center gap-2 cursor-pointer hover:bg-white/10 rounded-lg p-2 transition-all duration-300' onClick={() => navigate('/profile')}>
                                             <User2 className="text-purple-400 w-4 h-4" />
-                                            <Link to="/profile" className="text-gray-300 hover:text-white text-sm font-medium">View Profile</Link>
+                                            <span className="text-gray-300 hover:text-white text-sm font-medium">View Profile</span>
                                         </div>
                                     )}
                                     <div className='flex items-center gap-2 cursor-pointer hover:bg-red-500/10 rounded-lg p-2 transition-all duration-300' onClick={logoutHandler}>
@@ -164,20 +160,11 @@ const Navbar = () => {
                                 </div>
                             </PopoverContent>
                         </Popover>
-                    ) : (
-                        <div className="flex items-center gap-2">
-                            <Link to="/login">
-                                <Button variant="outline" size="sm" className="h-8 px-3 text-xs border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400">Login</Button>
-                            </Link>
-                            <Link to="/signup">
-                                <Button size="sm" className="h-8 px-3 text-xs bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold">Signup</Button>
-                            </Link>
-                        </div>
                     )}
                     {/* Hamburger Button */}
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="text-gray-300 hover:text-white transition-colors duration-300 p-1 ml-1"
+                        className="text-gray-300 hover:text-white transition-colors duration-300 p-1"
                     >
                         {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
@@ -186,20 +173,16 @@ const Navbar = () => {
 
             {/* Mobile Dropdown Menu */}
             {menuOpen && (
-                <div className="md:hidden absolute top-full left-0 right-0 z-50 bg-slate-900/98 backdrop-blur-xl border-b border-purple-500/30 shadow-2xl">
+                <div className="md:hidden absolute top-full left-0 right-0 z-[100] bg-slate-900/98 backdrop-blur-xl border-b border-purple-500/30 shadow-2xl">
                     <ul className='flex flex-col font-semibold py-4 px-6 gap-1'>
                         {navLinks}
                         {!user && (
                             <>
                                 <li className="pt-2">
-                                    <Link to="/login" onClick={() => setMenuOpen(false)}>
-                                        <Button variant="outline" className="w-full border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400 transition-all duration-300 font-semibold">Login</Button>
-                                    </Link>
+                                    <Button onClick={() => { navigate('/login'); setMenuOpen(false); }} variant="outline" className="w-full border-purple-400/50 text-gray-300 hover:text-white hover:bg-white/10 hover:border-purple-400 transition-all duration-300 font-semibold">Login</Button>
                                 </li>
                                 <li className="pt-1">
-                                    <Link to="/signup" onClick={() => setMenuOpen(false)}>
-                                        <Button className="w-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-semibold shadow-lg transition-all duration-300">Signup</Button>
-                                    </Link>
+                                    <Button onClick={() => { navigate('/signup'); setMenuOpen(false); }} className="w-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-semibold shadow-lg transition-all duration-300">Signup</Button>
                                 </li>
                             </>
                         )}
