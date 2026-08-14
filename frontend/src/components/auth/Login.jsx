@@ -55,7 +55,9 @@ const Login = () => {
     },[user, navigate]);
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-            <Navbar />
+            <div className="relative z-50">
+                <Navbar />
+            </div>
             
             {/* Animated grid background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div>
